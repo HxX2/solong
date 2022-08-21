@@ -14,7 +14,7 @@
 
 void	throwerror(char *msg)
 {
-	ft_printf("Error: %s\n", msg);
+	ft_printf("\033[0;31m\033[1mError: \033[0;0m%s\n", msg);
 	exit(1);
 }
 
