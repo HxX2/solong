@@ -1,4 +1,4 @@
-SRC = solong.c src/map.c src/ft_split.c  src/str_utils.c src/printf/libftprintf.a
+SRC = solong.c src/map_checker.c src/ft_split.c  src/str_utils.c src/printf/libftprintf.a src/sprites.c src/events.c src/put_map.c
 CC = gcc
 NAME = solong
 FLAGS = -Wextra -Werror -Wall -lmlx -framework OpenGL -framework AppKit
@@ -55,9 +55,9 @@ bonus: | header
 
 
 san: | header
-	@echo "\033[0;35m\033[1m────── making fprintf ──────\033[0;0m"
+	@echo "\033[0;35m\033[1m────── making printf ──────\033[0;0m"
 	@printf "\033[2m"
-	@$(MAKE) -C src/fprintf/
+	@$(MAKE) -C src/printf/
 	@echo "\033[0;0m"
 	@echo "\033[0;35m\033[1m────── making solong ──────\033[0;0m"
 	@printf "\033[2m"

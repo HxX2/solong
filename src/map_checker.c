@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_checker.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:36:14 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/20 20:56:24 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/21 14:28:13 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	check_keys(t_game	*game)
 			throwerror("Map is not rectangular");
 		if (!ft_strchr(keys, s[i]))
 			throwerror("Unkown key in the map");
+		if (s[i] == 'C')
+			game->nbtns += 1;
 		i++;
 	}
 	if (!ft_strchr(s, 'P'))
