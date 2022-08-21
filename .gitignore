@@ -3,3 +3,5 @@
 /a.out.dSYM
 /todo
 /solong
+/src/printf/*.o
+/src/printf/*.a
