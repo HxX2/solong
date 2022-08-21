@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:09:19 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/21 20:20:34 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/21 20:54:58 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	move_player_down(t_game	*game, t_player	*player, t_sprite *sprite)
 	else if (game->alloc.map[player->y + 1][player->x] == 'c')
 	{
 		put_image(game, game->sprites.ground.img, player->x, player->y);
-		player->y -= 1;
+		player->y += 1;
 		put_image(game, game->sprites.btndown.img, player->x, player->y);
 		put_image(game, sprite->img, player->x, player->y);
 	}
@@ -150,7 +150,7 @@ void	move_player_left(t_game	*game, t_player	*player, t_sprite *sprite)
 	else if (game->alloc.map[player->y][player->x - 1] == 'c')
 	{
 		put_image(game, game->sprites.ground.img, player->x, player->y);
-		player->y -= 1;
+		player->x -= 1;
 		put_image(game, game->sprites.btndown.img, player->x, player->y);
 		put_image(game, sprite->img, player->x, player->y);
 	}
@@ -204,7 +204,7 @@ void	move_player_right(t_game *game, t_player *player, t_sprite *sprite)
 	else if (game->alloc.map[player->y][player->x + 1] == 'c')
 	{
 		put_image(game, game->sprites.ground.img, player->x, player->y);
-		player->y -= 1;
+		player->x += 1;
 		put_image(game, game->sprites.btndown.img, player->x, player->y);
 		put_image(game, sprite->img, player->x, player->y);
 	}
