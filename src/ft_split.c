@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 08:55:38 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/20 14:06:08 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/22 21:54:42 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,11 @@ char	**ft_split(char const *s, char c)
 	}
 	p[j] = NULL;
 	return (p);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	while (len)
+		((unsigned char *)b)[--len] = c;
+	return (b);
 }

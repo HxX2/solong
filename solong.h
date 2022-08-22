@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:11:11 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/21 18:07:06 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/22 22:29:48 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,13 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_R 15
 
-typedef struct s_player
+typedef struct s_vec
 {
 	int		x;
 	int		y;
-}			t_player;
-
-typedef struct s_exit
-{
-	int		x;
-	int		y;
-}			t_exit;
+}			t_vec;
 
 typedef struct s_alloc
 {
@@ -85,12 +80,13 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	char		*mapfile;
-	int			mapwidth;
-	int			mapheight;
+	int			mapw;
+	int			maph;
 	int			nbtns;
+	int			nmoves;
 	t_sprites	sprites;
-	t_player	player;
-	t_exit		exit;
+	t_vec		player;
+	t_vec		exit;
 	t_alloc		alloc;
 }		t_game;
 
@@ -101,19 +97,28 @@ void	set_sprites(t_game	*game);
 void	put_walls(t_game *game, t_sprites *sprites, int x, int y);
 void	put_map(t_game *game, t_sprites *sprites);
 void	put_image(t_game *game, void	*img, int x, int y);
+void	reset_btns(t_game *game);
 
 int		close_win(void *param);
 int		key_press(int keycode, void *param);
 
+void	move_up(t_game *game, t_vec *player, t_sprite *sprite, int key);
+void	move_down(t_game *game, t_vec *player, t_sprite *sprite, int key);
+void	move_left(t_game *game, t_vec *player, t_sprite *sprite, int key);
+void	move_right(t_game *game, t_vec *player, t_sprite *sprite, int key);
+void	is_exit(t_game *game, t_vec *player, t_sprite *sprite, int key);
+void	is_btnup(t_game *game, t_vec *player, t_sprite *sprite, int key);
+void	is_btndown(t_game *game, t_vec *player, t_sprite *sprite, int key);
+void	is_ground(t_game *game, t_vec *player, t_sprite *sprite, int key);
+
 char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
 void	throwerror(char *msg);
+void	ft_rwipe(void *ptr, int plvl);
 void	*ft_calloc(size_t n);
-
-void ft_sleep(void);
-int	loop_hook(void *param);
 
 #endif

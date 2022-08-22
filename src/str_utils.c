@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils.c                                        :+:      :+:    :+:   */
+/*   str_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 20:20:02 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/20 20:20:06 by zlafou           ###   ########.fr       */
+/*   Created: 2022/08/22 22:24:58 by zlafou            #+#    #+#             */
+/*   Updated: 2022/08/22 22:25:52 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../solong.h"
 
-void	*ft_calloc(size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	void		*ptr;
+	size_t	i;
 
-	ptr = malloc(n);
-	if (!ptr)
+	i = 0;
+	while (((s1[i] && s2[i]) && s1[i] == s2[i]) && i + 1 < n)
+		i++;
+	if (n == 0)
 		return (0);
-	while (n)
-		((unsigned char *)ptr)[--n] = 0;
-	return (ptr);
-}
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	while (len)
-		((unsigned char *)b)[--len] = c;
-	return (b);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 size_t	ft_strlen(const char *str)
