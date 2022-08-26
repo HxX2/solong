@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:11:11 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/22 22:29:48 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/26 22:12:09 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_vec
 {
 	int		x;
 	int		y;
+	char	etype;
 }			t_vec;
 
 typedef struct s_alloc
@@ -75,6 +76,22 @@ typedef struct s_sprites
 	t_sprite	wallup;
 }		t_sprites;
 
+/*---------------BONUS----------------*/
+
+typedef struct s_bsprites
+{
+	t_sprite	enemy;
+	t_sprite	eleft;
+	t_sprite	eright;
+	t_sprite	eup;
+	t_sprite	edown;
+	t_sprite	pdead;
+	t_sprite	exitlight;
+	t_sprite	mask;
+}		t_bsprites;
+
+/*------------------------------------*/
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -85,19 +102,24 @@ typedef struct s_game
 	int			nbtns;
 	int			nmoves;
 	t_sprites	sprites;
+	t_bsprites	bsprites;
 	t_vec		player;
 	t_vec		exit;
+	t_vec		*enemies;
+	int			nenemies;
+	int			isdead;
+	int			isonenemy;
 	t_alloc		alloc;
 }		t_game;
 
 void	check_rectangular_walls(t_game	*game);
 void	setmap(t_game	*game);
-void	check_keys(t_game	*game);
+void	checkmap(t_game	*game);
 void	set_sprites(t_game	*game);
 void	put_walls(t_game *game, t_sprites *sprites, int x, int y);
 void	put_map(t_game *game, t_sprites *sprites);
 void	put_image(t_game *game, void	*img, int x, int y);
-void	reset_btns(t_game *game);
+void	set_defaults(t_game *game);
 
 int		close_win(void *param);
 int		key_press(int keycode, void *param);
@@ -120,5 +142,20 @@ size_t	ft_strlen(const char *str);
 void	throwerror(char *msg);
 void	ft_rwipe(void *ptr, int plvl);
 void	*ft_calloc(size_t n);
+
+/*---------------BONUS----------------*/
+
+void	is_enemy(t_game *game, t_vec *player, int key);
+int		is_on_enemy(t_game *game, int px, int py);
+int		is_on_player(t_game *game, int ex, int ey);
+int		move_enemies(void *param);
+void	emove_up(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
+void	emove_down(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
+void	emove_left(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
+void	emove_right(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
+void	animation(t_game *game);
+char	*ft_itoa(int n);
+void	put_moves(t_game *game, int moves);
+void	reset_enteties(t_game *game, int i, int j, int *k);
 
 #endif

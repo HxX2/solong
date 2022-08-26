@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:02:07 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/22 18:37:38 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/25 19:39:18 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	put_walls(t_game *game, t_sprites *sprites, int x, int y)
 
 void	put_image(t_game *game, void *img, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->win, \
-		img, x * 32, y * 32);
+	mlx_put_image_to_window(game->mlx, game->win, img, x * 32, y * 32);
 }
 
 void	put_player(t_game *game, t_sprites *sprites, int x, int y)
@@ -48,10 +47,23 @@ void	put_player(t_game *game, t_sprites *sprites, int x, int y)
 	put_image(game, sprites->player.img, x, y);
 }
 
+void	put_exit(t_game *game, t_sprites *sprites, int x, int y)
+{
+	game->exit.x = x;
+	game->exit.y = y;
+	put_image(game, sprites->exitclose.img, x, y);
+}
+
+void	put_enemy(t_game *game, t_sprites *sprites, int x, int y)
+{
+	put_image(game, sprites->ground.img, x, y);
+	put_image(game, game->bsprites.enemy.img, x, y);
+}
+
 void	put_map(t_game *game, t_sprites *sprites)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (++y < game->maph)
@@ -62,11 +74,9 @@ void	put_map(t_game *game, t_sprites *sprites)
 			if (game->alloc.map[y][x] == '0')
 				put_image(game, sprites->ground.img, x, y);
 			else if (game->alloc.map[y][x] == 'E')
-			{
-				game->exit.x = x;
-				game->exit.y = y;
-				put_image(game, sprites->exitclose.img, x, y);
-			}
+				put_exit(game, sprites, x, y);
+			else if (game->alloc.map[y][x] == 'B')
+				put_enemy(game, sprites, x, y);
 			else if (game->alloc.map[y][x] == 'C')
 				put_image(game, sprites->btnup.img, x, y);
 			else if (game->alloc.map[y][x] == 'P')

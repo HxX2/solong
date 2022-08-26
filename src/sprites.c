@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 10:55:20 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/22 18:37:57 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/25 05:24:18 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,34 @@ static void	set_walls(t_game *game)
 		&game->sprites.wallleft.w, &game->sprites.wallleft.h);
 }
 
+static void	set_enemy(t_game *game)
+{
+	game->bsprites.enemy.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/enemy.xpm", \
+		&game->bsprites.enemy.w, &game->bsprites.enemy.h);
+	game->bsprites.eup.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/eup.xpm", \
+		&game->bsprites.eup.w, &game->bsprites.eup.h);
+	game->bsprites.edown.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/edown.xpm", \
+		&game->bsprites.edown.w, &game->bsprites.edown.h);
+	game->bsprites.eleft.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/eleft.xpm", \
+		&game->bsprites.eleft.w, &game->bsprites.eleft.h);
+	game->bsprites.eright.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/eright.xpm", \
+		&game->bsprites.eright.w, &game->bsprites.eright.h);
+	game->bsprites.pdead.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/pdead.xpm", \
+		&game->bsprites.pdead.w, &game->bsprites.pdead.h);
+	game->bsprites.exitlight.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/exitlight.xpm", \
+		&game->bsprites.exitlight.w, &game->bsprites.exitlight.h);
+	game->bsprites.mask.img = \
+		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/mask.xpm", \
+		&game->bsprites.mask.w, &game->bsprites.mask.h);
+}
+
 static void	set_player(t_game *game)
 {
 	game->sprites.down.img = \
@@ -66,6 +94,7 @@ void	set_sprites(t_game *game)
 {
 	set_player(game);
 	set_walls(game);
+	set_enemy(game);
 	game->sprites.ground.img = \
 		mlx_xpm_file_to_image(game->mlx, "assets/sprites/xpm/ground.xpm", \
 		&game->sprites.ground.w, &game->sprites.ground.h);

@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:36:14 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/22 22:37:11 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/25 18:41:58 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	is_dup(char *s)
 		throwerror("There is no exit");
 }
 
-void	check_keys(t_game	*game)
+void	checkmap(t_game	*game)
 {
 	int		i;
 	char	*s;
 	char	*keys;
 
 	s = game->alloc.smap;
-	keys = "P01CE\n";
+	keys = "P01CEB\n";
 	i = 0;
 	while (s[i])
 	{
@@ -49,9 +49,12 @@ void	check_keys(t_game	*game)
 			throwerror("Unkown key in the map");
 		if (s[i] == 'C')
 			game->nbtns += 1;
+		if (s[i] == 'B')
+			game->nenemies += 1;
 		i++;
 	}
 	is_dup(s);
+	check_rectangular_walls(game);
 }
 
 void	setmap(t_game	*game)
@@ -77,6 +80,7 @@ void	setmap(t_game	*game)
 		game->alloc.smap = ft_strjoin(tmp, buff);
 		free(tmp);
 	}
+	free(buff);
 	game->alloc.map = ft_split(game->alloc.smap, '\n');
 }
 

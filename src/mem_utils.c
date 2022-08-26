@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:20:02 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/22 22:25:47 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/25 17:50:01 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,27 @@ void	*ft_calloc(size_t n)
 	return (ptr);
 }
 
+char	*ft_itoa(int n)
+{
+	char	*p;
+	int		sn;
+	int		i;
+
+	i = 1;
+	sn = n;
+	while (sn > 9)
+	{
+		sn /= 10;
+		i++;
+	}
+	p = malloc(sizeof(char) * i + 1);
+	if (!p)
+		return (NULL);
+	p[i] = '\0';
+	while (--i >= 0)
+	{
+		p[i] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (p);
+}
