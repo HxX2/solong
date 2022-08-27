@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:02:07 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/25 19:39:18 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/27 18:22:17 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ void	put_exit(t_game *game, t_sprites *sprites, int x, int y)
 	game->exit.x = x;
 	game->exit.y = y;
 	put_image(game, sprites->exitclose.img, x, y);
-}
-
-void	put_enemy(t_game *game, t_sprites *sprites, int x, int y)
-{
-	put_image(game, sprites->ground.img, x, y);
-	put_image(game, game->bsprites.enemy.img, x, y);
 }
 
 void	put_map(t_game *game, t_sprites *sprites)

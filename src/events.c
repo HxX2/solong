@@ -6,35 +6,11 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:09:19 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/26 22:44:37 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/27 18:55:16 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../solong.h"
-
-void	destroy_sprites(t_game	*game)
-{
-	mlx_destroy_image(game->mlx, game->sprites.ground.img);
-	mlx_destroy_image(game->mlx, game->sprites.exitclose.img);
-	mlx_destroy_image(game->mlx, game->sprites.exitopen.img);
-	mlx_destroy_image(game->mlx, game->sprites.btnup.img);
-	mlx_destroy_image(game->mlx, game->sprites.btndown.img);
-	mlx_destroy_image(game->mlx, game->sprites.cornerdownleft.img);
-	mlx_destroy_image(game->mlx, game->sprites.cornerdownright.img);
-	mlx_destroy_image(game->mlx, game->sprites.cornerupleft.img);
-	mlx_destroy_image(game->mlx, game->sprites.cornerupright.img);
-	mlx_destroy_image(game->mlx, game->sprites.player.img);
-	mlx_destroy_image(game->mlx, game->sprites.playerdone.img);
-	mlx_destroy_image(game->mlx, game->sprites.down.img);
-	mlx_destroy_image(game->mlx, game->sprites.left.img);
-	mlx_destroy_image(game->mlx, game->sprites.right.img);
-	mlx_destroy_image(game->mlx, game->sprites.up.img);
-	mlx_destroy_image(game->mlx, game->sprites.wall.img);
-	mlx_destroy_image(game->mlx, game->sprites.walldown.img);
-	mlx_destroy_image(game->mlx, game->sprites.wallleft.img);
-	mlx_destroy_image(game->mlx, game->sprites.wallright.img);
-	mlx_destroy_image(game->mlx, game->sprites.wallup.img);
-}
 
 int	close_win(void *param)
 {
@@ -45,6 +21,7 @@ int	close_win(void *param)
 	destroy_sprites(game);
 	ft_rwipe(game->alloc.map, 2);
 	ft_rwipe(game->alloc.smap, 1);
+	ft_rwipe(game->enemies, 1);
 	exit(0);
 }
 
@@ -86,8 +63,9 @@ int	key_press(int keycode, void *param)
 	is_gameover = (player->y == exit->y && player->x == exit->x);
 	if (keycode == KEY_R)
 	{
-		put_map(game, sprites);
 		set_defaults(game);
+		put_map(game, sprites);
+		put_moves(game, 0);
 	}
 	if (keycode == KEY_ESC)
 		close_win(game);
@@ -105,7 +83,6 @@ void	set_defaults(t_game *game)
 
 	game->nbtns = 0;
 	game->nmoves = 0;
-	put_moves(game, 0);
 	i = -1;
 	k = 0;
 	while (++i < game->maph)

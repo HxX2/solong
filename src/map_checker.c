@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:36:14 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/25 18:41:58 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/26 23:56:37 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	is_dup(char *s)
 {
 	if (!ft_strchr(s, 'P'))
 		throwerror("There is no player");
+	if (!ft_strchr(s, 'E'))
+		throwerror("There is no exit");
+	if (!ft_strchr(s, 'C'))
+		throwerror("There is no collectible");
 	if (ft_strchr((ft_strchr(s, 'P') + 1), 'P'))
 		throwerror("Too many players");
 	if (ft_strchr((ft_strchr(s, 'E') + 1), 'E'))
 		throwerror("Too many exits");
-	if (!ft_strchr(s, 'C'))
-		throwerror("There is no collectible");
-	if (!ft_strchr(s, 'E'))
-		throwerror("There is no exit");
 }
 
 void	checkmap(t_game	*game)
@@ -55,6 +55,10 @@ void	checkmap(t_game	*game)
 	}
 	is_dup(s);
 	check_rectangular_walls(game);
+	game->f[0] = emove_up;
+	game->f[1] = emove_down;
+	game->f[2] = emove_left;
+	game->f[3] = emove_right;
 }
 
 void	setmap(t_game	*game)

@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:11:11 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/26 22:12:09 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/27 18:32:18 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_game
 	int			isdead;
 	int			isonenemy;
 	t_alloc		alloc;
+	void		(*f[4])(struct s_game*, t_vec*);
 }		t_game;
 
 void	check_rectangular_walls(t_game	*game);
@@ -148,14 +149,19 @@ void	*ft_calloc(size_t n);
 void	is_enemy(t_game *game, t_vec *player, int key);
 int		is_on_enemy(t_game *game, int px, int py);
 int		is_on_player(t_game *game, int ex, int ey);
-int		move_enemies(void *param);
-void	emove_up(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
-void	emove_down(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
-void	emove_left(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
-void	emove_right(t_game *game, t_vec *enemy, t_sprite *sprite, int key);
+int		move_enemies(t_game *param);
+void	emove_up(t_game *game, t_vec *enemy);
+void	emove_down(t_game *game, t_vec *enemy);
+void	emove_left(t_game *game, t_vec *enemy);
+void	emove_right(t_game *game, t_vec *enemy);
 void	animation(t_game *game);
 char	*ft_itoa(int n);
 void	put_moves(t_game *game, int moves);
 void	reset_enteties(t_game *game, int i, int j, int *k);
-
+void	put_enemy(t_game *game, t_sprites *sprites, int x, int y);
+void	destroy_sprites(t_game	*game);
+void	put_moves(t_game *game, int moves);
+int		move_enemies(t_game *game);
+void	animation(t_game *game);
+int		mlx_print(t_game *game);
 #endif

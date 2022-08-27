@@ -1,4 +1,4 @@
-SRC = solong.c src/map_checker.c src/ft_split.c  src/str_utils.c src/printf/libftprintf.a src/sprites.c src/events.c src/put_map.c src/collision.c src/controls.c src/mem_utils.c src/econtrols.c
+SRC = solong.c src/map_checker.c src/ft_split.c  src/str_utils.c src/printf/libftprintf.a src/sprites.c src/events.c src/put_map.c src/collision.c src/controls.c src/mem_utils.c src/econtrols.c src/bevent.c
 CC = gcc
 NAME = solong
 FLAGS = -Wextra -Werror -Wall -lmlx -framework OpenGL -framework AppKit
