@@ -60,18 +60,4 @@ $(BNAME): $(BSRC) | header
 	$(CC) $(FLAGS) -o $(BNAME) $(BSRC)
 	@echo
 
-
-san: | header
-	@echo "\033[0;35m\033[1m────── making printf ──────\033[0;0m"
-	@printf "\033[2m"
-	@$(MAKE) -C src/printf/
-	@echo "\033[0;0m"
-	@echo "\033[0;35m\033[1m────── making solong ──────\033[0;0m"
-	@printf "\033[2m"
-	$(CC) $(FLAGS) -o $(NAME) $(SRC) -fsanitize=address -g
-	@echo
-	@echo "\033[0;39m\033[1m(fsanitize build)\033[0;0m"
-
-sre: fclean san
-
 .PHONY: all clean fclean re san sre
