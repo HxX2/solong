@@ -23,7 +23,7 @@ footer :
 bfooter :
 	@echo $(BFOOTER)
 
-$(NAME): | header
+$(NAME): $(SRC) | header
 	@echo "\033[0;35m\033[1m────── making printf ──────\033[0;0m"
 	@printf "\033[2m"
 	@$(MAKE) -C src/printf/
@@ -52,7 +52,7 @@ fclean: clean | header
 
 re: fclean all
 
-$(BNAME): | header
+$(BNAME): $(BSRC) | header
 	@echo "\033[0;35m\033[1m────── making printf ──────\033[0;0m"
 	@printf "\033[2m"
 	@$(MAKE) -C src/printf/
