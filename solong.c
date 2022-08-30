@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:09:04 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/27 18:28:58 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/28 16:44:08 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		throwerror("You need to provide one map");
 	ft_memset(&game, 0, sizeof(t_game));
-	game.nbtns = 0;
 	game.nenemies = 0;
-	game.nmoves = 2;
 	game.mapfile = av[1];
 	setmap(&game);
 	checkmap(&game);
@@ -30,6 +28,7 @@ int	main(int ac, char **av)
 			"solong");
 	set_sprites(&game);
 	game.enemies = ft_calloc(sizeof(t_vec) * game.nenemies);
+	game.alloc.animation = ft_calloc(2 * sizeof(t_sprite));
 	put_map(&game, &game.sprites);
 	set_defaults(&game);
 	put_moves(&game, 0);

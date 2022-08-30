@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:09:19 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/27 18:55:16 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/28 16:45:52 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	close_win(void *param)
 	ft_rwipe(game->alloc.map, 2);
 	ft_rwipe(game->alloc.smap, 1);
 	ft_rwipe(game->enemies, 1);
+	ft_rwipe(game->alloc.animation, 1);
 	exit(0);
 }
 

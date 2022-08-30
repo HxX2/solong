@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils1.c                                       :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 22:24:58 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/22 22:25:52 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/28 16:50:30 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,22 @@ char	*ft_strchr(const char *s, int c)
 	if (i == ft_strlen(s) && s[i] != c)
 		return (0);
 	return ((char *)(s + i));
+}
+
+void	put_moves(t_game *game, int moves)
+{
+	char	*num;
+	char	*join;
+
+	ft_printf("%d\n", game->nmoves);
+	put_image(game, game->bsprites.mask.img, 2, 0);
+	put_image(game, game->bsprites.mask.img, 3, 0);
+	put_image(game, game->bsprites.mask.img, 4, 0);
+	put_image(game, game->bsprites.mask.img, 5, 0);
+	num = ft_itoa(moves);
+	join = ft_strjoin("moves: ", num);
+	mlx_string_put(game->mlx, game->win, 79, \
+		-1, 0xffffff, join);
+	free(num);
+	free(join);
 }

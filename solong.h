@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:11:11 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/27 18:32:18 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/29 21:23:19 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include "mlx.h"
 # include "src/printf/ft_printf.h"
 
@@ -39,18 +38,19 @@ typedef struct s_vec
 	char	etype;
 }			t_vec;
 
-typedef struct s_alloc
-{
-	char	**map;
-	char	*smap;
-}		t_alloc;
-
 typedef struct s_sprite
 {
 	void	*img;
 	int		h;
 	int		w;
 }			t_sprite;
+
+typedef struct s_alloc
+{
+	char		**map;
+	char		*smap;
+	t_sprite	*animation;
+}		t_alloc;
 
 typedef struct s_sprites
 {
@@ -164,4 +164,6 @@ void	put_moves(t_game *game, int moves);
 int		move_enemies(t_game *game);
 void	animation(t_game *game);
 int		mlx_print(t_game *game);
+void	destroy_bsprites(t_game	*game);
+
 #endif

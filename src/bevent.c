@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:19:53 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/27 19:38:46 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/29 20:19:11 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,18 @@ void	destroy_sprites(t_game	*game)
 	mlx_destroy_image(game->mlx, game->sprites.wallleft.img);
 	mlx_destroy_image(game->mlx, game->sprites.wallright.img);
 	mlx_destroy_image(game->mlx, game->sprites.wallup.img);
+	destroy_bsprites(game);
 }
 
-void	put_moves(t_game *game, int moves)
+void	destroy_bsprites(t_game	*game)
 {
-	ft_printf("%d\n", game->nmoves);
-	put_image(game, game->bsprites.mask.img, 2, 0);
-	put_image(game, game->bsprites.mask.img, 3, 0);
-	put_image(game, game->bsprites.mask.img, 4, 0);
-	put_image(game, game->bsprites.mask.img, 5, 0);
-	mlx_string_put(game->mlx, game->win, 79, \
-		-1, 0xffffff, ft_strjoin("moves: ", ft_itoa(moves)));
+	mlx_destroy_image(game->mlx, game->bsprites.edown.img);
+	mlx_destroy_image(game->mlx, game->bsprites.eup.img);
+	mlx_destroy_image(game->mlx, game->bsprites.eleft.img);
+	mlx_destroy_image(game->mlx, game->bsprites.eright.img);
+	mlx_destroy_image(game->mlx, game->bsprites.exitlight.img);
+	mlx_destroy_image(game->mlx, game->bsprites.mask.img);
+	mlx_destroy_image(game->mlx, game->bsprites.pdead.img);
 }
 
 int	move_enemies(t_game *game)
@@ -58,8 +59,6 @@ int	move_enemies(t_game *game)
 	static int	count = 0;
 	int			i;
 
-	if (count < 2000)
-		return (0 * ++count);
 	i = -1;
 	while (++i < game->nenemies || !game->nenemies)
 	{
@@ -69,6 +68,8 @@ int	move_enemies(t_game *game)
 		if (game->isdead || (game->player.y == game->exit.y
 				&& game->player.x == game->exit.x))
 			return (mlx_print(game));
+		if (count < 1500)
+			return (0 * ++count);
 		if (!game->nenemies)
 			break ;
 		else
@@ -86,7 +87,7 @@ void	animation(t_game *game)
 	t_sprite	*sprites;
 	static int	i = 0;
 
-	sprites = ft_calloc(3 * sizeof(t_sprite));
+	sprites = game->alloc.animation;
 	sprites[0] = game->sprites.exitclose;
 	sprites[1] = game->bsprites.exitlight;
 	if (game->nbtns != 0)
