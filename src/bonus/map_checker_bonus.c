@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   map_checker_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:36:14 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/29 22:13:18 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/30 20:03:54 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../solong.h"
+#include "../../solong_bonus.h"
 
 void	throwerror(char *msg)
 {
@@ -39,7 +39,7 @@ void	checkmap(t_game	*game)
 	char	*keys;
 
 	s = game->alloc.smap;
-	keys = "P01CE\n";
+	keys = "P01CEB\n";
 	i = 0;
 	while (s[i])
 	{
@@ -49,10 +49,16 @@ void	checkmap(t_game	*game)
 			throwerror("Unkown key in the map");
 		if (s[i] == 'C')
 			game->nbtns += 1;
+		if (s[i] == 'B')
+			game->nenemies += 1;
 		i++;
 	}
 	is_dup(s);
 	check_rectangular_walls(game);
+	game->f[0] = emove_up;
+	game->f[1] = emove_down;
+	game->f[2] = emove_left;
+	game->f[3] = emove_right;
 }
 
 void	setmap(t_game	*game)

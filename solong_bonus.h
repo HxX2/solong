@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solong.h                                           :+:      :+:    :+:   */
+/*   solong_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:11:11 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/29 22:35:23 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/30 19:59:22 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SOLONG_H
-# define SOLONG_H
+#ifndef SOLONG_BONUS_H
+# define SOLONG_BONUS_H
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -38,18 +38,19 @@ typedef struct s_vec
 	char	etype;
 }			t_vec;
 
-typedef struct s_alloc
-{
-	char	**map;
-	char	*smap;
-}		t_alloc;
-
 typedef struct s_sprite
 {
 	void	*img;
 	int		h;
 	int		w;
 }			t_sprite;
+
+typedef struct s_alloc
+{
+	char		**map;
+	char		*smap;
+	t_sprite	*animation;
+}		t_alloc;
 
 typedef struct s_sprites
 {
@@ -75,6 +76,22 @@ typedef struct s_sprites
 	t_sprite	wallup;
 }		t_sprites;
 
+/*---------------BONUS----------------*/
+
+typedef struct s_bsprites
+{
+	t_sprite	enemy;
+	t_sprite	eleft;
+	t_sprite	eright;
+	t_sprite	eup;
+	t_sprite	edown;
+	t_sprite	pdead;
+	t_sprite	exitlight;
+	t_sprite	mask;
+}		t_bsprites;
+
+/*------------------------------------*/
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -85,9 +102,15 @@ typedef struct s_game
 	int			nbtns;
 	int			nmoves;
 	t_sprites	sprites;
+	t_bsprites	bsprites;
 	t_vec		player;
 	t_vec		exit;
+	t_vec		*enemies;
+	int			nenemies;
+	int			isdead;
+	int			isonenemy;
 	t_alloc		alloc;
+	void		(*f[4])(struct s_game*, t_vec*);
 }		t_game;
 
 void	check_rectangular_walls(t_game	*game);
@@ -98,8 +121,6 @@ void	put_walls(t_game *game, t_sprites *sprites, int x, int y);
 void	put_map(t_game *game, t_sprites *sprites);
 void	put_image(t_game *game, void	*img, int x, int y);
 void	set_defaults(t_game *game);
-void	destroy_sprites(t_game *game);
-void	reset_enteties(t_game *game, int i, int j);
 
 int		close_win(void *param);
 int		key_press(int keycode, void *param);
@@ -122,7 +143,27 @@ size_t	ft_strlen(const char *str);
 void	throwerror(char *msg);
 void	ft_rwipe(void *ptr, int plvl);
 void	*ft_calloc(size_t n);
-int		is_gameover(t_game *param);
+
+/*---------------BONUS----------------*/
+
+void	is_enemy(t_game *game, t_vec *player, int key);
+int		is_on_enemy(t_game *game, int px, int py);
+int		is_on_player(t_game *game, int ex, int ey);
+int		move_enemies(t_game *param);
+void	emove_up(t_game *game, t_vec *enemy);
+void	emove_down(t_game *game, t_vec *enemy);
+void	emove_left(t_game *game, t_vec *enemy);
+void	emove_right(t_game *game, t_vec *enemy);
+void	animation(t_game *game);
+char	*ft_itoa(int n);
+void	put_moves(t_game *game, int moves);
+void	reset_enteties(t_game *game, int i, int j, int *k);
+void	put_enemy(t_game *game, t_sprites *sprites, int x, int y);
+void	destroy_sprites(t_game	*game);
+void	put_moves(t_game *game, int moves);
+int		move_enemies(t_game *game);
+void	animation(t_game *game);
 int		mlx_print(t_game *game);
+void	destroy_bsprites(t_game	*game);
 
 #endif

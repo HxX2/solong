@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:20:02 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/27 19:39:06 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/29 22:35:37 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,26 @@ void	*ft_calloc(size_t n)
 	return (ptr);
 }
 
-char	*ft_itoa(int n)
+void	destroy_sprites(t_game *game)
 {
-	char	*p;
-	int		sn;
-	int		i;
-
-	i = 1;
-	sn = n;
-	while (sn > 9)
-	{
-		sn /= 10;
-		i++;
-	}
-	p = malloc(sizeof(char) * i + 1);
-	if (!p)
-		return (NULL);
-	p[i] = '\0';
-	while (--i >= 0)
-	{
-		p[i] = (n % 10) + '0';
-		n /= 10;
-	}
-	return (p);
+	mlx_destroy_image(game->mlx, game->sprites.ground.img);
+	mlx_destroy_image(game->mlx, game->sprites.exitclose.img);
+	mlx_destroy_image(game->mlx, game->sprites.exitopen.img);
+	mlx_destroy_image(game->mlx, game->sprites.btnup.img);
+	mlx_destroy_image(game->mlx, game->sprites.btndown.img);
+	mlx_destroy_image(game->mlx, game->sprites.cornerdownleft.img);
+	mlx_destroy_image(game->mlx, game->sprites.cornerdownright.img);
+	mlx_destroy_image(game->mlx, game->sprites.cornerupleft.img);
+	mlx_destroy_image(game->mlx, game->sprites.cornerupright.img);
+	mlx_destroy_image(game->mlx, game->sprites.player.img);
+	mlx_destroy_image(game->mlx, game->sprites.playerdone.img);
+	mlx_destroy_image(game->mlx, game->sprites.down.img);
+	mlx_destroy_image(game->mlx, game->sprites.left.img);
+	mlx_destroy_image(game->mlx, game->sprites.right.img);
+	mlx_destroy_image(game->mlx, game->sprites.up.img);
+	mlx_destroy_image(game->mlx, game->sprites.wall.img);
+	mlx_destroy_image(game->mlx, game->sprites.walldown.img);
+	mlx_destroy_image(game->mlx, game->sprites.wallleft.img);
+	mlx_destroy_image(game->mlx, game->sprites.wallright.img);
+	mlx_destroy_image(game->mlx, game->sprites.wallup.img);
 }

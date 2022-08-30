@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_map.c                                          :+:      :+:    :+:   */
+/*   put_map_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:02:07 by zlafou            #+#    #+#             */
-/*   Updated: 2022/08/29 22:14:00 by zlafou           ###   ########.fr       */
+/*   Updated: 2022/08/30 20:03:54 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../solong.h"
+#include "../../solong_bonus.h"
 
 void	put_walls(t_game *game, t_sprites *sprites, int x, int y)
 {
@@ -69,6 +69,8 @@ void	put_map(t_game *game, t_sprites *sprites)
 				put_image(game, sprites->ground.img, x, y);
 			else if (game->alloc.map[y][x] == 'E')
 				put_exit(game, sprites, x, y);
+			else if (game->alloc.map[y][x] == 'B')
+				put_enemy(game, sprites, x, y);
 			else if (game->alloc.map[y][x] == 'C')
 				put_image(game, sprites->btnup.img, x, y);
 			else if (game->alloc.map[y][x] == 'P')
